@@ -3,7 +3,9 @@
 # Class: FixedSizeList
 
 ## Type parameters
-#### T 
+
+#### T
+
 ## Hierarchy
 
 **FixedSizeList**
@@ -12,23 +14,23 @@
 
 ### Constructors
 
-* [constructor](fixedsizelist.md#constructor)
+- [constructor](fixedsizelist.md#constructor)
 
 ### Properties
 
-* [eventEmitter](fixedsizelist.md#eventemitter)
-* [maxSize](fixedsizelist.md#maxsize)
+- [eventEmitter](fixedsizelist.md#eventemitter)
+- [maxSize](fixedsizelist.md#maxsize)
 
 ### Accessors
 
-* [length](fixedsizelist.md#length)
+- [length](fixedsizelist.md#length)
 
 ### Methods
 
-* [__@iterator](fixedsizelist.md#___iterator)
-* [add](fixedsizelist.md#add)
-* [get](fixedsizelist.md#get)
-* [reset](fixedsizelist.md#reset)
+- [\_\_@iterator](fixedsizelist.md#___iterator)
+- [add](fixedsizelist.md#add)
+- [get](fixedsizelist.md#get)
+- [reset](fixedsizelist.md#reset)
 
 ---
 
@@ -36,99 +38,102 @@
 
 <a id="constructor"></a>
 
-###  constructor
+### constructor
 
-⊕ **new FixedSizeList**(maxSize: *`number`*, _list?: *`T`[]*, eventEmitter?: *`EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`>*): [FixedSizeList](fixedsizelist.md)
+⊕ **new FixedSizeList**(maxSize: _`number`_, \_list?: _`T`[]_, eventEmitter?: _`EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`>_): [FixedSizeList](fixedsizelist.md)
 
 **Parameters:**
 
-| Param | Type | Default value |
-| ------ | ------ | ------ |
-| maxSize | `number` | - |
-| `Default value` _list | `T`[] |  [] |
-| `Default value` eventEmitter | `EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`> |  new EventEmitter&lt;IFixedSizeListEvents&gt;() |
+| Param                        | Type                                                                                                  | Default value                                  |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| maxSize                      | `number`                                                                                              | -                                              |
+| `Default value` \_list       | `T`[]                                                                                                 | []                                             |
+| `Default value` eventEmitter | `EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`> | new EventEmitter&lt;IFixedSizeListEvents&gt;() |
 
 **Returns:** [FixedSizeList](fixedsizelist.md)
 
-___
+---
 
 ## Properties
 
 <a id="eventemitter"></a>
 
-###  eventEmitter
+### eventEmitter
 
-**● eventEmitter**: *`EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`>*
+**● eventEmitter**: _`EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`>_
 
-___
+---
+
 <a id="maxsize"></a>
 
-###  maxSize
+### maxSize
 
-**● maxSize**: *`number`*
+**● maxSize**: _`number`_
 
-___
+---
 
 ## Accessors
 
 <a id="length"></a>
 
-###  length
+### length
 
 getlength(): `number`
 
 **Returns:** `number`
 
-___
+---
 
 ## Methods
 
 <a id="___iterator"></a>
 
-###  __@iterator
+### \_\_@iterator
 
-▸ **__@iterator**(): `IterableIterator`<`T`>
+▸ **\_\_@iterator**(): `IterableIterator`<`T`>
 
 **Returns:** `IterableIterator`<`T`>
 
-___
+---
+
 <a id="add"></a>
 
-###  add
+### add
 
-▸ **add**(newEl: *`T`*): `number`
+▸ **add**(newEl: _`T`_): `number`
 
 **Parameters:**
 
 | Param | Type |
-| ------ | ------ |
-| newEl | `T` |
+| ----- | ---- |
+| newEl | `T`  |
 
 **Returns:** `number`
 
-___
+---
+
 <a id="get"></a>
 
-###  get
+### get
 
-▸ **get**(index: *`number`*):  `T` &#124; `undefined`
+▸ **get**(index: _`number`_): `T` &#124; `undefined`
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
+| Param | Type     |
+| ----- | -------- |
 | index | `number` |
 
-**Returns:**  `T` &#124; `undefined`
+**Returns:** `T` &#124; `undefined`
 
-___
+---
+
 <a id="reset"></a>
 
-###  reset
+### reset
 
 ▸ **reset**(): `void`
 
 **Returns:** `void`
 
-___
-
+---
