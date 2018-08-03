@@ -41,7 +41,11 @@
     "array",
     "fixed",
     "size",
-    "length"
+    "length",
+    "typescript",
+    "javascript",
+    "event",
+    "emitter"
   ],
   "author": "",
   "license": "MIT",
