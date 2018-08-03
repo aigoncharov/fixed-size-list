@@ -2,6 +2,8 @@
 
 # Class: FixedSizeList
 
+_**description**_: Fixed size list. New elements are added to the beginning of the list. Removes elements from the end of the list if it becomes longer than maxSize. Has an event emitter and emits eventCreated, eventReset, eventNewItem, eventTruncate.
+
 ## Type parameters
 
 #### T
@@ -44,11 +46,11 @@
 
 **Parameters:**
 
-| Param                        | Type                                                                                                  | Default value                                  |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| maxSize                      | `number`                                                                                              | -                                              |
-| `Default value` \_list       | `T`[]                                                                                                 | []                                             |
-| `Default value` eventEmitter | `EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`> | new EventEmitter&lt;IFixedSizeListEvents&gt;() |
+| Param                        | Type                                                                                                  | Default value                                  | Description                                                                                          |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| maxSize                      | `number`                                                                                              | -                                              | Max size of the list                                                                                 |
+| `Default value` \_list       | `T`[]                                                                                                 | []                                             | Initial values of the list. Truncated if it's longer than maxSize                                    |
+| `Default value` eventEmitter | `EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`> | new EventEmitter&lt;IFixedSizeListEvents&gt;() | Event emitter that you can subscribe to. Emits eventCreated, eventReset, eventNewItem, eventTruncate |
 
 **Returns:** [FixedSizeList](fixedsizelist.md)
 
@@ -60,6 +62,8 @@
 
 ### eventEmitter
 
+Event emitter that you can subscribe to. Emits eventCreated, eventReset, eventNewItem, eventTruncate
+
 **● eventEmitter**: _`EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`>_
 
 ---
@@ -67,6 +71,8 @@
 <a id="maxsize"></a>
 
 ### maxSize
+
+Max size of the list
 
 **● maxSize**: _`number`_
 
@@ -78,7 +84,11 @@
 
 ### length
 
+_**description**_: Get length of the list
+
 getlength(): `number`
+
+_**description**_: Get length of the list
 
 **Returns:** `number`
 
@@ -102,6 +112,8 @@ getlength(): `number`
 
 ▸ **add**(newEl: _`T`_): `number`
 
+_**description**_: Add a new element to the list. The element added to the beginning! of the list. Emits eventNewItem with the element itself
+
 **Parameters:**
 
 | Param | Type |
@@ -118,6 +130,8 @@ getlength(): `number`
 
 ▸ **get**(index: _`number`_): `T` &#124; `undefined`
 
+_**description**_: Get an element of the list by index
+
 **Parameters:**
 
 | Param | Type     |
@@ -133,6 +147,8 @@ getlength(): `number`
 ### reset
 
 ▸ **reset**(): `void`
+
+_**description**_: Clear the list. Emits eventReset
 
 **Returns:** `void`
 

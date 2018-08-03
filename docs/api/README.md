@@ -13,7 +13,7 @@
 ### Variables
 
 - [eventCreated](#eventcreated)
-- [eventNewElement](#eventnewelement)
+- [eventNewItem](#eventnewitem)
 - [eventReset](#eventreset)
 - [eventTruncate](#eventtruncate)
 
@@ -40,11 +40,11 @@ _
 
 ---
 
-<a id="eventnewelement"></a>
+<a id="eventnewitem"></a>
 
-### `<Const>` eventNewElement
+### `<Const>` eventNewItem
 
-**● eventNewElement**: _`unique symbol`_ = Symbol('FixedSizeListNewElement')
+**● eventNewItem**: _`unique symbol`_ = Symbol('FixedSizeListNewItem')
 
 ---
 

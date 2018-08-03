@@ -1,7 +1,7 @@
 {
   "name": "fixed-size-list",
   "version": "0.1.0",
-  "description": "A small library that brings fixed-length lists to Typescript and Javascript",
+  "description": "A small library that brings fixed-length lists with event emitters to Typescript and Javascript",
   "main": "dist/index.js",
   "dependencies": {
     "eventemitter3": "^3.1.0"
@@ -22,7 +22,7 @@
     "tslint-config-standard": "^7.1.0",
     "typedoc": "^0.11.1",
     "typedoc-plugin-markdown": "git+https://git@github.com/keenondrums/typedoc-plugin-markdown.git",
-    "typescript": "^3.0.0-rc"
+    "typescript": "^3.0.1"
   },
   "scripts": {
     "test": "mocha --recursive --use_strict --require ts-node/register './**/*.test.ts'",

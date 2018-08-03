@@ -4,12 +4,12 @@ import { fake } from 'sinon'
 
 import {
   eventCreated,
-  eventNewElement,
+  eventNewItem,
   eventReset,
   eventTruncate,
   FixedSizeList,
   IFixedSizeListEvents
-} from '.'
+} from './index'
 
 describe('FixedSizeList', () => {
   const fixedSizeListCreateAndCheck = <T>(
@@ -63,8 +63,8 @@ describe('FixedSizeList', () => {
     const newItem1 = { val: 123 }
     const newItem2 = { val: 234 }
     const fixedSizeList = fixedSizeListCreateAndCheck<{ val: number }>(maxSize)
-    const eventNewElementSpy = fake()
-    fixedSizeList.eventEmitter.on(eventNewElement, eventNewElementSpy)
+    const eventNewItemSpy = fake()
+    fixedSizeList.eventEmitter.on(eventNewItem, eventNewItemSpy)
     fixedSizeList.add(newItem1)
     expect(fixedSizeList.length).to.be.equal(1)
     expect(fixedSizeList.get(0)).to.be.equal(newItem1)
@@ -72,11 +72,11 @@ describe('FixedSizeList', () => {
     expect(fixedSizeList.length).to.be.equal(2)
     expect(fixedSizeList.get(0)).to.be.equal(newItem2)
     expect(fixedSizeList.get(1)).to.be.equal(newItem1)
-    expect(eventNewElementSpy.callCount).to.be.equal(2)
-    expect(eventNewElementSpy.args[0].length).to.be.equal(1)
-    expect(eventNewElementSpy.args[0][0]).to.be.equal(newItem1)
-    expect(eventNewElementSpy.args[1].length).to.be.equal(1)
-    expect(eventNewElementSpy.args[1][0]).to.be.equal(newItem2)
+    expect(eventNewItemSpy.callCount).to.be.equal(2)
+    expect(eventNewItemSpy.args[0].length).to.be.equal(1)
+    expect(eventNewItemSpy.args[0][0]).to.be.equal(newItem1)
+    expect(eventNewItemSpy.args[1].length).to.be.equal(1)
+    expect(eventNewItemSpy.args[1][0]).to.be.equal(newItem2)
   })
   it('success: adds new items and truncates', () => {
     const maxSize = 1
