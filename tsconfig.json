@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "./dist",
+    "target": "es2015",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "declaration": true,
+    "removeComments": true
+  },
+  "include": [
+    "./index.ts"
+  ]
+}

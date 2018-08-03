@@ -1,0 +1,12 @@
+*.idea
+node_modules
+*.log*
+/docs
+/tsconfig*
+/tslint*
+/index.ts
+*.test.ts
+.prettierignore
+.vscode
+*.tgz
+*.md
