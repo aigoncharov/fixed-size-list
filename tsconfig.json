@@ -9,7 +9,8 @@
     "baseUrl": "./",
     "moduleResolution": "node",
     "declaration": true,
-    "removeComments": true
+    "removeComments": true,
+    "module": "commonjs"
   },
   "include": [
     "./index.ts"

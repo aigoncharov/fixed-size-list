@@ -1,6 +1,6 @@
 {
   "name": "fixed-size-list",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A small library that brings fixed-length lists with event emitters to Typescript and Javascript",
   "main": "dist/index.js",
   "dependencies": {
