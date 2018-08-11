@@ -1,4 +1,4 @@
-# fixed-size-list
+# fixed-size-list [![Build Status](https://travis-ci.org/keenondrums/fixed-size-list.svg?branch=master)](https://travis-ci.org/keenondrums/fixed-size-list)
 
 A small library that brings fixed-length lists with event emitters to Typescript and Javascript
 
