@@ -1,6 +1,6 @@
 {
   "name": "fixed-size-list",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A small library that brings fixed-length lists with event emitters to Typescript and Javascript",
   "main": "dist/index.js",
   "dependencies": {
@@ -45,7 +45,11 @@
     "typescript",
     "javascript",
     "event",
-    "emitter"
+    "emitter",
+    "circular buffer",
+    "circular queue",
+    "cyclic buffer",
+    "ring buffer"
   ],
   "author": "",
   "license": "MIT",
