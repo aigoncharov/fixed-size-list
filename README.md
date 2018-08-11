@@ -1,6 +1,6 @@
 # fixed-size-list [![Build Status](https://travis-ci.org/keenondrums/fixed-size-list.svg?branch=master)](https://travis-ci.org/keenondrums/fixed-size-list)
 
-A small library that brings fixed-length lists with event emitters to Typescript and Javascript
+A small library that brings a fixed-length list (aka circular buffer) with an event emitter to Typescript and Javascript
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
