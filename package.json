@@ -1,6 +1,6 @@
 {
   "name": "fixed-size-list",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "A small library that brings a fixed-length list (aka circular buffer) with an event emitter to Typescript and Javascript",
   "main": "dist/index.js",
   "dependencies": {
@@ -13,7 +13,6 @@
     "chai": "^4.1.2",
     "doctoc": "^1.3.1",
     "mocha": "^5.2.0",
-    "npm-check-updates": "^2.14.2",
     "pre-commit": "^1.2.2",
     "prettier": "^1.14.0",
     "sinon": "^6.1.4",
@@ -25,8 +24,8 @@
     "typescript": "^3.0.1"
   },
   "scripts": {
-    "test": "mocha --recursive --use_strict --require ts-node/register './**/*.test.ts'",
-    "compile": "rm -rf ./dist && ./node_modules/.bin/tsc -p ./tsconfig.json",
+    "test": "./node_modules/.bin/mocha --recursive --use_strict --require ts-node/register './**/*.test.ts'",
+    "compile": "rm -rf ./dist && ./node_modules/.bin/tsc -p ./tsconfig.prod.json",
     "lint": "./node_modules/.bin/tsc -p ./tsconfig.json --noEmit && ./node_modules/.bin/tslint -c ./tslint.json -p ./tsconfig.json",
     "docs": "rm -rf docs/api && ./node_modules/.bin/typedoc --tsconfig ./tsconfig.docs.json --mode file --ignoreCompilerErrors --excludePrivate --excludeProtected --readme none --theme markdown --mdHideSources --mdEngine github --out ./docs/api ./index.ts && find ./docs/api/ -type f -exec sed -i \"s/\\`\\`\\`js/\\\\n\\`\\`\\`js/g\" {} \\; && npm run markdown-format && git stage './**/*.md'",
     "markdown-format": "./node_modules/.bin/doctoc ./README.md && ./node_modules/.bin/prettier --write './**/*.md'",
@@ -51,7 +50,7 @@
     "cyclic buffer",
     "ring buffer"
   ],
-  "author": "",
+  "author": "keenondrums (andrey.goncharov+it@protonmail.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/keenondrums/fixed-size-list/issues"

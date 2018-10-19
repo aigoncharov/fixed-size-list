@@ -12,7 +12,5 @@
     "removeComments": true,
     "module": "commonjs"
   },
-  "include": [
-    "./index.ts"
-  ]
+  "include": ["./**/*.ts"]
 }
