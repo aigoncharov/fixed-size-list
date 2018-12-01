@@ -11,7 +11,7 @@ A small library that brings a fixed-length list (aka circular buffer) with an ev
   - [eventNewItem](#eventnewitem)
   - [eventTruncate](#eventtruncate)
   - [eventReset](#eventreset)
-  - [eventReset](#eventreset-1)
+  - [eventCreated](#eventcreated)
 - [API](#api)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -124,7 +124,7 @@ fixedSizeList.reset();
 // logs 'list reset'
 ```
 
-### eventReset
+### eventCreated
 
 We can the third optional parameter of FixedSizeList's constructor and pass a custom event emitter
 
