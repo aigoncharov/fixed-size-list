@@ -1,7 +1,7 @@
 {
   "name": "fixed-size-list",
   "version": "0.3.0",
-  "description": "A small library that brings a fixed-length list (aka circular buffer) with an event emitter to Typescript and Javascript",
+  "description": "Immutable fixed-length list (a.k.a circular buffer) with an event emitter for Typescript and Javascript",
   "main": "dist/index.js",
   "dependencies": {
     "mitt": "^1.2.0"
