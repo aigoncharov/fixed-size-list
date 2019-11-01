@@ -1,21 +1,22 @@
-# fixed-size-list
+
+#  fixed-size-list
 
 ## Index
 
 ### Classes
 
-- [FixedSizeList](classes/fixedsizelist.md)
+* [FixedSizeList](classes/fixedsizelist.md)
 
 ### Type aliases
 
-- [IFixedSizeListEvents](#ifixedsizelistevents)
+* [IFixedSizeListEvents](#ifixedsizelistevents)
 
 ### Variables
 
-- [eventCreated](#eventcreated)
-- [eventNewItem](#eventnewitem)
-- [eventReset](#eventreset)
-- [eventTruncate](#eventtruncate)
+* [eventCreated](#eventcreated)
+* [eventNewItem](#eventnewitem)
+* [eventReset](#eventreset)
+* [eventTruncate](#eventtruncate)
 
 ---
 
@@ -23,12 +24,12 @@
 
 <a id="ifixedsizelistevents"></a>
 
-### IFixedSizeListEvents
+###  IFixedSizeListEvents
 
-**ΤIFixedSizeListEvents**: _ `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`
-_
+**ΤIFixedSizeListEvents**: * "FixedSizeListCreated" &#124; "FixedSizeListReset" &#124; "FixedSizeListNewItem" &#124; "FixedSizeListTruncate"
+*
 
----
+___
 
 ## Variables
 
@@ -36,30 +37,28 @@ _
 
 ### `<Const>` eventCreated
 
-**● eventCreated**: _`unique symbol`_ = Symbol('FixedSizeListCreated')
+**● eventCreated**: *"FixedSizeListCreated"* = "FixedSizeListCreated"
 
----
-
+___
 <a id="eventnewitem"></a>
 
 ### `<Const>` eventNewItem
 
-**● eventNewItem**: _`unique symbol`_ = Symbol('FixedSizeListNewItem')
+**● eventNewItem**: *"FixedSizeListNewItem"* = "FixedSizeListNewItem"
 
----
-
+___
 <a id="eventreset"></a>
 
 ### `<Const>` eventReset
 
-**● eventReset**: _`unique symbol`_ = Symbol('FixedSizeListReset')
+**● eventReset**: *"FixedSizeListReset"* = "FixedSizeListReset"
 
----
-
+___
 <a id="eventtruncate"></a>
 
 ### `<Const>` eventTruncate
 
-**● eventTruncate**: _`unique symbol`_ = Symbol('FixedSizeListTruncate')
+**● eventTruncate**: *"FixedSizeListTruncate"* = "FixedSizeListTruncate"
 
----
+___
+

@@ -2,12 +2,10 @@
 
 # Class: FixedSizeList
 
-_**description**_: Fixed size list. New elements are added to the beginning of the list. Removes elements from the end of the list if it becomes longer than maxSize. Has an event emitter and emits eventCreated, eventReset, eventNewItem, eventTruncate.
+*__description__*: Fixed size list. New elements are added to the beginning of the list. Removes elements from the end of the list if it becomes longer than maxSize. Has an event emitter and emits eventCreated, eventReset, eventNewItem, eventTruncate.
 
 ## Type parameters
-
-#### T
-
+#### T 
 ## Hierarchy
 
 **FixedSizeList**
@@ -16,23 +14,25 @@ _**description**_: Fixed size list. New elements are added to the beginning of t
 
 ### Constructors
 
-- [constructor](fixedsizelist.md#constructor)
+* [constructor](fixedsizelist.md#constructor)
 
 ### Properties
 
-- [eventEmitter](fixedsizelist.md#eventemitter)
-- [maxSize](fixedsizelist.md#maxsize)
+* [eventEmitter](fixedsizelist.md#eventemitter)
+* [maxSize](fixedsizelist.md#maxsize)
 
 ### Accessors
 
-- [length](fixedsizelist.md#length)
+* [length](fixedsizelist.md#length)
 
 ### Methods
 
-- [\_\_@iterator](fixedsizelist.md#___iterator)
-- [add](fixedsizelist.md#add)
-- [get](fixedsizelist.md#get)
-- [reset](fixedsizelist.md#reset)
+* [__@iterator](fixedsizelist.md#___iterator)
+* [add](fixedsizelist.md#add)
+* [forEach](fixedsizelist.md#foreach)
+* [get](fixedsizelist.md#get)
+* [map](fixedsizelist.md#map)
+* [reset](fixedsizelist.md#reset)
 
 ---
 
@@ -40,116 +40,148 @@ _**description**_: Fixed size list. New elements are added to the beginning of t
 
 <a id="constructor"></a>
 
-### constructor
+###  constructor
 
-⊕ **new FixedSizeList**(maxSize: _`number`_, \_list?: _`T`[]_, eventEmitter?: _`EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`>_): [FixedSizeList](fixedsizelist.md)
+⊕ **new FixedSizeList**(maxSize: *`number`*, _list?: *`T`[]*, eventEmitter?: *`Emitter`*): [FixedSizeList](fixedsizelist.md)
 
 **Parameters:**
 
-| Param                        | Type                                                                                                  | Default value                                  | Description                                                                                          |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| maxSize                      | `number`                                                                                              | -                                              | Max size of the list                                                                                 |
-| `Default value` \_list       | `T`[]                                                                                                 | []                                             | Initial values of the list. Truncated if it's longer than maxSize                                    |
-| `Default value` eventEmitter | `EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`> | new EventEmitter&lt;IFixedSizeListEvents&gt;() | Event emitter that you can subscribe to. Emits eventCreated, eventReset, eventNewItem, eventTruncate |
+| Param | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| maxSize | `number` | - |  Max size of the list |
+| `Default value` _list | `T`[] |  [] |  Initial values of the list. Truncated if it's longer than maxSize |
+| `Default value` eventEmitter | `Emitter` |  EventEmitter() |  Event emitter that you can subscribe to. Emits eventCreated, eventReset, eventNewItem, eventTruncate |
 
 **Returns:** [FixedSizeList](fixedsizelist.md)
 
----
+___
 
 ## Properties
 
 <a id="eventemitter"></a>
 
-### eventEmitter
+###  eventEmitter
 
 Event emitter that you can subscribe to. Emits eventCreated, eventReset, eventNewItem, eventTruncate
 
-**● eventEmitter**: _`EventEmitter`< `unique symbol` &#124; `unique symbol` &#124; `unique symbol` &#124; `unique symbol`>_
+**● eventEmitter**: *`Emitter`*
 
----
-
+___
 <a id="maxsize"></a>
 
-### maxSize
+###  maxSize
 
 Max size of the list
 
-**● maxSize**: _`number`_
+**● maxSize**: *`number`*
 
----
+___
 
 ## Accessors
 
 <a id="length"></a>
 
-### length
+###  length
 
-_**description**_: Get length of the list
+*__description__*: Get length of the list
 
 getlength(): `number`
 
-_**description**_: Get length of the list
+*__description__*: Get length of the list
 
 **Returns:** `number`
 
----
+___
 
 ## Methods
 
 <a id="___iterator"></a>
 
-### \_\_@iterator
+###  __@iterator
 
-▸ **\_\_@iterator**(): `IterableIterator`<`T`>
+▸ **__@iterator**(): `IterableIterator`<`T`>
 
 **Returns:** `IterableIterator`<`T`>
 
----
-
+___
 <a id="add"></a>
 
-### add
+###  add
 
-▸ **add**(newEl: _`T`_): `number`
+▸ **add**(newEl: *`T`*): `number`
 
-_**description**_: Add a new element to the list. The element added to the beginning! of the list. Emits eventNewItem with the element itself
+*__description__*: Add a new element to the list. The element added to the beginning! of the list. Emits eventNewItem with the element itself
 
 **Parameters:**
 
 | Param | Type |
-| ----- | ---- |
-| newEl | `T`  |
+| ------ | ------ |
+| newEl | `T` |
 
 **Returns:** `number`
 
----
+___
+<a id="foreach"></a>
 
-<a id="get"></a>
+###  forEach
 
-### get
-
-▸ **get**(index: _`number`_): `T` &#124; `undefined`
-
-_**description**_: Get an element of the list by index
+▸ **forEach**(cb: *`function`*, thisArg?: *`any`*): `void`
 
 **Parameters:**
 
-| Param | Type     |
-| ----- | -------- |
-| index | `number` |
-
-**Returns:** `T` &#124; `undefined`
-
----
-
-<a id="reset"></a>
-
-### reset
-
-▸ **reset**(): `void`
-
-_**description**_: Clear the list. Emits eventReset
+| Param | Type |
+| ------ | ------ |
+| cb | `function` |
+| `Optional` thisArg | `any` |
 
 **Returns:** `void`
 
----
+___
+<a id="get"></a>
+
+###  get
+
+▸ **get**(index: *`number`*):  `T` &#124; `undefined`
+
+*__description__*: Get an element of the list by index
+
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| index | `number` |
+
+**Returns:**  `T` &#124; `undefined`
+
+___
+<a id="map"></a>
+
+###  map
+
+▸ **map**U(cb: *`function`*, thisArg?: *`any`*): `U`[]
+
+**Type parameters:**
+
+#### U 
+**Parameters:**
+
+| Param | Type |
+| ------ | ------ |
+| cb | `function` |
+| `Optional` thisArg | `any` |
+
+**Returns:** `U`[]
+
+___
+<a id="reset"></a>
+
+###  reset
+
+▸ **reset**(): `void`
+
+*__description__*: Clear the list. Emits eventReset
+
+**Returns:** `void`
+
+___
+
