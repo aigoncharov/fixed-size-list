@@ -23,29 +23,42 @@ npm i fixed-size-list
 ```
 
 ```ts
-import { FixedSizeList } from "fixed-size-list";
+import { FixedSizeList } from 'fixed-size-list'
 
-const maxSize = 3;
-const fixedSizeList = new FixedSizeList<number>(maxSize);
+const maxSize = 3
+const fixedSizeList = new FixedSizeList<number>(maxSize)
 // Now it's empty
-fixedSizeList.add(1);
+fixedSizeList.add(1)
 // Not it's [ 1 ]
-fixedSizeList.add(2);
+fixedSizeList.add(2)
 // Now it's [ 2, 1 ]
-fixedSizeList.add(3);
+fixedSizeList.add(3)
 // Now it's [ 3, 2, 1 ]
-fixedSizeList.add(4);
+fixedSizeList.add(4)
 // Now it's [ 4, 3, 2 ]
-console.log(fixedSizeList.get(1)); // logs 3
-console.log(fixedSizeList.get(0)); // logs 4
+
+console.log(fixedSizeList.get(1)) // logs 3
+console.log(fixedSizeList.get(0)) // logs 4
+
 // it's iterable
-for (const el of fixedSizeList) {
-  console.log(el);
+for (const item of fixedSizeList) {
+  console.log(item)
   // logs 4 on the first iteration
   // logs 3 on the second iteration
   // logs 2 on the second iteration
 }
-fixedSizeList.reset();
+
+// you can `map` the items
+const mapped = fixedSizeList.map((item) => `Item: ${item}`)
+// `mapped` is ['Item: 4','Item: 3','Item: 2']
+
+// you can `forEach` over the items
+fixedSizeList.forEach((item) => console.log(item))
+// logs 4 on the first iteration
+// logs 3 on the second iteration
+// logs 2 on the second iteration
+
+fixedSizeList.reset()
 // Now it's []
 ```
 
@@ -54,22 +67,22 @@ fixedSizeList.reset();
 You can set initial values easily passing them to the constructor
 
 ```ts
-import { FixedSizeList } from "fixed-size-list";
+import { FixedSizeList } from 'fixed-size-list'
 
-const maxSize = 3;
-const list = [1, 2, 3];
-const fixedSizeList = new FixedSizeList<number>(maxSize, list);
+const maxSize = 3
+const list = [1, 2, 3]
+const fixedSizeList = new FixedSizeList<number>(maxSize, list)
 // Now it's [ 1, 2, 3 ]
 ```
 
 Be aware that the initial list is truncated if it's longer than maxSize
 
 ```ts
-import { FixedSizeList } from "fixed-size-list";
+import { FixedSizeList } from 'fixed-size-list'
 
-const maxSize = 2;
-const list = [1, 2, 3];
-const fixedSizeList = new FixedSizeList<number>(maxSize, list);
+const maxSize = 2
+const list = [1, 2, 3]
+const fixedSizeList = new FixedSizeList<number>(maxSize, list)
 // Now it's [ 1, 2 ]
 // 3 was truncated
 ```
@@ -83,14 +96,12 @@ FixedSizeList has an event emitter. You can listen to specific events
 It emits an added item
 
 ```ts
-import { FixedSizeList, eventNewItem } from "fixed-size-list";
+import { FixedSizeList, eventNewItem } from 'fixed-size-list'
 
-const maxSize = 2;
-const fixedSizeList = new FixedSizeList<number>(maxSize);
-fixedSizeList.eventEmitter.on(eventNewItem, newItem =>
-  console.log("item added", newItem)
-);
-fixedSizeList.add(5);
+const maxSize = 2
+const fixedSizeList = new FixedSizeList<number>(maxSize)
+fixedSizeList.eventEmitter.on(eventNewItem, (newItem) => console.log('item added', newItem))
+fixedSizeList.add(5)
 // logs 'item added 5'
 ```
 
@@ -99,28 +110,26 @@ fixedSizeList.add(5);
 It emits an array of removed items
 
 ```ts
-import { FixedSizeList, eventTruncate } from "fixed-size-list";
+import { FixedSizeList, eventTruncate } from 'fixed-size-list'
 
-const maxSize = 2;
-const fixedSizeList = new FixedSizeList<number>(maxSize);
-fixedSizeList.eventEmitter.on(eventTruncate, removedItems =>
-  console.log("items removed", removedItems.toString())
-);
-fixedSizeList.add(5);
-fixedSizeList.add(4);
-fixedSizeList.add(3);
+const maxSize = 2
+const fixedSizeList = new FixedSizeList<number>(maxSize)
+fixedSizeList.eventEmitter.on(eventTruncate, (removedItems) => console.log('items removed', removedItems.toString()))
+fixedSizeList.add(5)
+fixedSizeList.add(4)
+fixedSizeList.add(3)
 // logs 'items removed [ 5 ]'
 ```
 
 ### eventReset
 
 ```ts
-import { FixedSizeList, eventReset } from "fixed-size-list";
+import { FixedSizeList, eventReset } from 'fixed-size-list'
 
-const maxSize = 2;
-const fixedSizeList = new FixedSizeList<number>(maxSize);
-fixedSizeList.eventEmitter.on(eventReset, () => console.log("list reset"));
-fixedSizeList.reset();
+const maxSize = 2
+const fixedSizeList = new FixedSizeList<number>(maxSize)
+fixedSizeList.eventEmitter.on(eventReset, () => console.log('list reset'))
+fixedSizeList.reset()
 // logs 'list reset'
 ```
 
@@ -129,19 +138,15 @@ fixedSizeList.reset();
 We can the third optional parameter of FixedSizeList's constructor and pass a custom event emitter
 
 ```ts
-import {
-  FixedSizeList,
-  eventCreated,
-  IFixedSizeListEvents
-} from "fixed-size-list";
-import * as EventEmitter from "eventemitter3";
+import { FixedSizeList, eventCreated, IFixedSizeListEvents } from 'fixed-size-list'
+import * as EventEmitter from 'eventemitter3'
 
-const maxSize = 2;
-const list = [];
-const emitter = new EventEmitter<IFixedSizeListEvents>();
-emitter.on(eventCreated, () => console.log("list created"));
+const maxSize = 2
+const list = []
+const emitter = new EventEmitter<IFixedSizeListEvents>()
+emitter.on(eventCreated, () => console.log('list created'))
 
-const fixedSizeList = new FixedSizeList<number>(maxSize, list, emitter);
+const fixedSizeList = new FixedSizeList<number>(maxSize, list, emitter)
 // logs 'list created'
 ```
 
