@@ -1,4 +1,4 @@
-import * as EventEmitter from 'mitt'
+import EventEmitter from 'mitt'
 
 export const eventCreated = 'FixedSizeListCreated'
 export const eventReset = 'FixedSizeListReset'

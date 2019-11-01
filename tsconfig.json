@@ -10,7 +10,9 @@
     "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
-    "module": "commonjs"
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "include": ["./**/*.ts"]
 }

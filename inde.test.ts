@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import * as EventEmitter from 'mitt'
+import EventEmitter from 'mitt'
 import { fake } from 'sinon'
 
 import { eventCreated, eventNewItem, eventReset, eventTruncate, FixedSizeList } from './index'
