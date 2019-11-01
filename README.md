@@ -1,6 +1,6 @@
 # fixed-size-list [![Build Status](https://travis-ci.org/keenondrums/fixed-size-list.svg?branch=master)](https://travis-ci.org/keenondrums/fixed-size-list)
 
-A small library that brings a fixed-length list (aka circular buffer) with an event emitter to Typescript and Javascript
+Immutable fixed-length list (a.k.a circular buffer) with an event emitter for Typescript and Javascript
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -37,26 +37,8 @@ fixedSizeList.add(3)
 fixedSizeList.add(4)
 // Now it's [ 4, 3, 2 ]
 
-console.log(fixedSizeList.get(1)) // logs 3
-console.log(fixedSizeList.get(0)) // logs 4
-
-// it's iterable
-for (const item of fixedSizeList) {
-  console.log(item)
-  // logs 4 on the first iteration
-  // logs 3 on the second iteration
-  // logs 2 on the second iteration
-}
-
-// you can `map` the items
-const mapped = fixedSizeList.map((item) => `Item: ${item}`)
-// `mapped` is ['Item: 4','Item: 3','Item: 2']
-
-// you can `forEach` over the items
-fixedSizeList.forEach((item) => console.log(item))
-// logs 4 on the first iteration
-// logs 3 on the second iteration
-// logs 2 on the second iteration
+console.log(fixedSizeList.data)
+// logs [4,3,2]
 
 fixedSizeList.reset()
 // Now it's []
@@ -89,7 +71,7 @@ const fixedSizeList = new FixedSizeList<number>(maxSize, list)
 
 ## Events
 
-FixedSizeList has an event emitter. You can listen to specific events
+FixedSizeList has an event emitter. You can listen to specific events. WARNING! `on` returns an unsubscribe function. Do not forget to call it when you no longer need the subscription to unsubscribe.
 
 ### eventNewItem
 
@@ -100,9 +82,12 @@ import { FixedSizeList, eventNewItem } from 'fixed-size-list'
 
 const maxSize = 2
 const fixedSizeList = new FixedSizeList<number>(maxSize)
-fixedSizeList.eventEmitter.on(eventNewItem, (newItem) => console.log('item added', newItem))
+const unsubscribe = fixedSizeList.on(eventNewItem, (newItem) => console.log('item added', newItem))
 fixedSizeList.add(5)
 // logs 'item added 5'
+
+// later on
+unsubscribe()
 ```
 
 ### eventTruncate
@@ -114,11 +99,16 @@ import { FixedSizeList, eventTruncate } from 'fixed-size-list'
 
 const maxSize = 2
 const fixedSizeList = new FixedSizeList<number>(maxSize)
-fixedSizeList.eventEmitter.on(eventTruncate, (removedItems) => console.log('items removed', removedItems.toString()))
+const unsubscribe = fixedSizeList.on(eventTruncate, (removedItems) =>
+  console.log('items removed', removedItems.toString()),
+)
 fixedSizeList.add(5)
 fixedSizeList.add(4)
 fixedSizeList.add(3)
 // logs 'items removed [ 5 ]'
+
+// later on
+unsubscribe()
 ```
 
 ### eventReset
@@ -128,26 +118,46 @@ import { FixedSizeList, eventReset } from 'fixed-size-list'
 
 const maxSize = 2
 const fixedSizeList = new FixedSizeList<number>(maxSize)
-fixedSizeList.eventEmitter.on(eventReset, () => console.log('list reset'))
+const unsubscribe = fixedSizeList.on(eventReset, () => console.log('list reset'))
 fixedSizeList.reset()
 // logs 'list reset'
+
+// later on
+unsubscribe()
 ```
 
 ### eventCreated
 
-We can the third optional parameter of FixedSizeList's constructor and pass a custom event emitter
+We can add the third optional parameter of FixedSizeList's constructor and pass a custom event emitter
 
 ```ts
 import { FixedSizeList, eventCreated, IFixedSizeListEvents } from 'fixed-size-list'
-import * as EventEmitter from 'eventemitter3'
+import mitt from 'mitt'
 
 const maxSize = 2
 const list = []
-const emitter = new EventEmitter<IFixedSizeListEvents>()
-emitter.on(eventCreated, () => console.log('list created'))
+const emitter = mitt()
+const unsubscribe = emitter.on(eventCreated, () => console.log('list created'))
 
 const fixedSizeList = new FixedSizeList<number>(maxSize, list, emitter)
 // logs 'list created'
+
+// later on
+unsubscribe()
+```
+
+### All
+
+We can subscribe to all events at once
+
+```ts
+import { FixedSizeList, eventCreated, IFixedSizeListEvents } from 'fixed-size-list'
+
+const fixedSizeList = new FixedSizeList<number>(10)
+const unsubscribe = emitter.on('*', () => console.log('Any event'))
+
+// later on
+unsubscribe()
 ```
 
 ## API

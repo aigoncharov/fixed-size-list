@@ -4,7 +4,19 @@ export const eventCreated = 'FixedSizeListCreated'
 export const eventReset = 'FixedSizeListReset'
 export const eventNewItem = 'FixedSizeListNewItem'
 export const eventTruncate = 'FixedSizeListTruncate'
-export type IFixedSizeListEvents = typeof eventCreated | typeof eventReset | typeof eventNewItem | typeof eventTruncate
+export type FixedSizeListEvents =
+  | typeof eventCreated
+  | typeof eventReset
+  | typeof eventNewItem
+  | typeof eventTruncate
+  | '*'
+type FixedSizeListEventEmitterCallback<T, E extends FixedSizeListEvents> = E extends typeof eventCreated
+  ? (initialList: T[]) => void
+  : E extends typeof eventNewItem
+  ? (newEl: T) => void
+  : E extends typeof eventTruncate
+  ? (removedEls: T[]) => void
+  : () => void
 
 /**
  * @description
@@ -23,8 +35,8 @@ export class FixedSizeList<T> {
    */
   constructor(
     public readonly maxSize: number,
-    protected readonly _list: T[] = [],
-    public readonly eventEmitter = EventEmitter(),
+    protected _list: T[] = [],
+    private readonly eventEmitter = EventEmitter(),
   ) {
     this.eventEmitter.emit(eventCreated, _list)
     this._truncate()
@@ -36,7 +48,7 @@ export class FixedSizeList<T> {
    * Emits eventNewItem with the element itself
    */
   public add(newEl: T): number {
-    this._list.unshift(newEl)
+    this._list = [newEl, ...this._list]
     this._truncate()
     this.eventEmitter.emit(eventNewItem, newEl)
     return this._list.length
@@ -48,30 +60,24 @@ export class FixedSizeList<T> {
    * Emits eventReset
    */
   public reset() {
-    this._list.splice(0)
+    this._list = []
     this.eventEmitter.emit(eventReset)
   }
 
   /**
    * @description
-   * Get an element of the list by index
+   * Subscribe to updates
+   *
+   * @returns
+   * Function to unsubscribe
    */
-  public get(index: number): T | undefined {
-    return this._list[index]
+  public on<E extends FixedSizeListEvents>(event: FixedSizeListEvents, cb: FixedSizeListEventEmitterCallback<T, E>) {
+    this.eventEmitter.on(event, cb)
+    return () => this.eventEmitter.off(event, cb)
   }
 
-  public map<U>(cb: (value: T, index: number, array: T[]) => U, thisArg?: any) {
-    return this._list.map<U>(cb, thisArg)
-  }
-
-  public forEach(cb: (value: T, index: number, array: T[]) => void, thisArg?: any) {
-    this._list.forEach(cb, thisArg)
-  }
-
-  public *[Symbol.iterator]() {
-    for (const el of this._list) {
-      yield el
-    }
+  public get data(): readonly T[] {
+    return this._list
   }
 
   /**
