@@ -1,56 +1,52 @@
 import { expect } from 'chai'
-import * as EventEmitter from 'eventemitter3'
+import * as EventEmitter from 'mitt'
 import { fake } from 'sinon'
 
-import {
-  eventCreated,
-  eventNewItem,
-  eventReset,
-  eventTruncate,
-  FixedSizeList,
-  IFixedSizeListEvents
-} from './index'
+import { eventCreated, eventNewItem, eventReset, eventTruncate, FixedSizeList } from './index'
 
 describe('FixedSizeList', () => {
-  const fixedSizeListCreateAndCheck = <T>(
-    maxSize: number,
-    list?: T[],
-    emitter?: EventEmitter<IFixedSizeListEvents>
-  ) => {
+  const fixedSizeListCreateAndCheck = <T>(maxSize: number, list?: T[], emitter?: EventEmitter.Emitter) => {
     const fixedSizeList = new FixedSizeList<T>(maxSize, list, emitter)
     expect(fixedSizeList).to.be.instanceof(FixedSizeList)
     expect(fixedSizeList.maxSize).to.be.equal(maxSize)
     expect(fixedSizeList.length).to.be.equal(list ? list.length : 0)
-    expect(fixedSizeList.eventEmitter).to.be.instanceof(EventEmitter)
+    expect(typeof fixedSizeList.eventEmitter).to.be.equal('object')
+    expect(fixedSizeList.eventEmitter).to.have.property('on')
+    expect(fixedSizeList.eventEmitter).to.have.property('off')
+    expect(fixedSizeList.eventEmitter).to.have.property('emit')
     if (list) {
-      const listInit = list.slice(0, maxSize)
-      for (const el of fixedSizeList) {
-        const indexInit = listInit.indexOf(el)
-        expect(indexInit).not.to.be.equal(-1)
-        listInit.splice(indexInit, 1)
-      }
-      expect(listInit.length).to.be.equal(0)
+      const listExpected = list.slice(0, maxSize)
+
+      const listActualIterator = [...fixedSizeList]
+      expect(listActualIterator).to.be.deep.equal(listExpected)
+
+      const listActualMap = fixedSizeList.map((item) => item)
+      expect(listActualMap).to.be.deep.equal(listExpected)
+
+      const listActualForEach: T[] = []
+      fixedSizeList.forEach((item) => listActualForEach.push(item))
+      expect(listActualForEach).to.be.deep.equal(listExpected)
     }
     return fixedSizeList
   }
-  it('success: created', () => {
+  it('can be created', () => {
     const maxSize = 10
     fixedSizeListCreateAndCheck(maxSize)
   })
-  it('success: created with pre-defined list', () => {
+  it('can be created with a pre-defined list', () => {
     const maxSize = 10
-    const list = [ { val: 3 }, { val: 4 }, { val: 5 } ]
+    const list = [{ val: 3 }, { val: 4 }, { val: 5 }]
     fixedSizeListCreateAndCheck<{ val: number }>(maxSize, list)
   })
-  it('success: pre-defined list is truncated', () => {
+  it('a pre-defined list is truncated', () => {
     const maxSize = 2
-    const list = [ { val: 3 }, { val: 4 }, { val: 5 } ]
+    const list = [{ val: 3 }, { val: 4 }, { val: 5 }]
     fixedSizeListCreateAndCheck<{ val: number }>(maxSize, list)
   })
-  it('success: created with custom EventEmitter', () => {
+  it('can be created with a custom EventEmitter', () => {
     const maxSize = 10
     const list: any[] = []
-    const emitter = new EventEmitter<IFixedSizeListEvents>()
+    const emitter = EventEmitter()
     const eventCreatedSpy = fake()
     emitter.on(eventCreated, eventCreatedSpy)
     fixedSizeListCreateAndCheck<{ val: number }>(maxSize, list, emitter)
@@ -58,7 +54,7 @@ describe('FixedSizeList', () => {
     expect(eventCreatedSpy.args[0].length).to.be.equal(1)
     expect(eventCreatedSpy.args[0][0]).to.be.equal(list)
   })
-  it('success: adds new items', () => {
+  it('adds new items', () => {
     const maxSize = 5
     const newItem1 = { val: 123 }
     const newItem2 = { val: 234 }
@@ -78,7 +74,7 @@ describe('FixedSizeList', () => {
     expect(eventNewItemSpy.args[1].length).to.be.equal(1)
     expect(eventNewItemSpy.args[1][0]).to.be.equal(newItem2)
   })
-  it('success: adds new items and truncates', () => {
+  it('adds new items and truncates', () => {
     const maxSize = 1
     const newItem1 = { val: 123 }
     const newItem2 = { val: 234 }
@@ -96,7 +92,7 @@ describe('FixedSizeList', () => {
     expect(truncatedItems.length).to.be.equal(1)
     expect(truncatedItems[0]).to.be.equal(newItem1)
   })
-  it('success: reset', () => {
+  it('can be reset', () => {
     const maxSize = 10
     const newItem1 = { val: 123 }
     const newItem2 = { val: 234 }
@@ -109,6 +105,8 @@ describe('FixedSizeList', () => {
     fixedSizeList.reset()
     expect(fixedSizeList.length).to.be.equal(0)
     expect(eventResetSpy.callCount).to.be.equal(1)
-    expect(eventResetSpy.args[0].length).to.be.equal(0)
+    console.log(eventResetSpy.args[0])
+    expect(eventResetSpy.args[0].length).to.be.equal(1)
+    expect(eventResetSpy.args[0][0]).to.be.equal(undefined)
   })
 })

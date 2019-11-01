@@ -1,14 +1,10 @@
-import * as EventEmitter from 'eventemitter3'
+import * as EventEmitter from 'mitt'
 
-export const eventCreated = Symbol('FixedSizeListCreated')
-export const eventReset = Symbol('FixedSizeListReset')
-export const eventNewItem = Symbol('FixedSizeListNewItem')
-export const eventTruncate = Symbol('FixedSizeListTruncate')
-export type IFixedSizeListEvents =
-  typeof eventCreated |
-  typeof eventReset |
-  typeof eventNewItem |
-  typeof eventTruncate
+export const eventCreated = 'FixedSizeListCreated'
+export const eventReset = 'FixedSizeListReset'
+export const eventNewItem = 'FixedSizeListNewItem'
+export const eventTruncate = 'FixedSizeListTruncate'
+export type IFixedSizeListEvents = typeof eventCreated | typeof eventReset | typeof eventNewItem | typeof eventTruncate
 
 /**
  * @description
@@ -25,10 +21,10 @@ export class FixedSizeList<T> {
    * @param eventEmitter
    * Event emitter that you can subscribe to. Emits eventCreated, eventReset, eventNewItem, eventTruncate
    */
-  constructor (
+  constructor(
     public readonly maxSize: number,
     protected readonly _list: T[] = [],
-    public readonly eventEmitter = new EventEmitter<IFixedSizeListEvents>()
+    public readonly eventEmitter = EventEmitter(),
   ) {
     this.eventEmitter.emit(eventCreated, _list)
     this._truncate()
@@ -39,7 +35,7 @@ export class FixedSizeList<T> {
    * Add a new element to the list. The element added to the beginning! of the list.
    * Emits eventNewItem with the element itself
    */
-  public add (newEl: T): number {
+  public add(newEl: T): number {
     this._list.unshift(newEl)
     this._truncate()
     this.eventEmitter.emit(eventNewItem, newEl)
@@ -51,7 +47,7 @@ export class FixedSizeList<T> {
    * Clear the list.
    * Emits eventReset
    */
-  public reset () {
+  public reset() {
     this._list.splice(0)
     this.eventEmitter.emit(eventReset)
   }
@@ -60,11 +56,19 @@ export class FixedSizeList<T> {
    * @description
    * Get an element of the list by index
    */
-  public get (index: number): T | undefined {
+  public get(index: number): T | undefined {
     return this._list[index]
   }
 
-  public * [Symbol.iterator] () {
+  public map<U>(cb: (value: T, index: number, array: T[]) => U, thisArg?: any) {
+    return this._list.map<U>(cb, thisArg)
+  }
+
+  public forEach(cb: (value: T, index: number, array: T[]) => void, thisArg?: any) {
+    this._list.forEach(cb, thisArg)
+  }
+
+  public *[Symbol.iterator]() {
     for (const el of this._list) {
       yield el
     }
@@ -74,7 +78,7 @@ export class FixedSizeList<T> {
    * @description
    * Get length of the list
    */
-  public get length (): number {
+  public get length(): number {
     return this._list.length
   }
 
@@ -83,7 +87,7 @@ export class FixedSizeList<T> {
    * Truncates the list if it's longer than maxSize. Removes elements from the end of the list.
    * Emits eventTruncate with an array of elements removed from the list.
    */
-  protected _truncate () {
+  protected _truncate() {
     if (this._list.length > this.maxSize) {
       const removedEls = this._list.splice(this.maxSize)
       this.eventEmitter.emit(eventTruncate, removedEls)
