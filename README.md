@@ -159,7 +159,3 @@ const unsubscribe = emitter.on('*', () => console.log('Any event'))
 // later on
 unsubscribe()
 ```
-
-## API
-
-[API reference](docs/api/README.md)
