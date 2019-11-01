@@ -105,7 +105,6 @@ describe('FixedSizeList', () => {
     fixedSizeList.reset()
     expect(fixedSizeList.length).to.be.equal(0)
     expect(eventResetSpy.callCount).to.be.equal(1)
-    console.log(eventResetSpy.args[0])
     expect(eventResetSpy.args[0].length).to.be.equal(1)
     expect(eventResetSpy.args[0][0]).to.be.equal(undefined)
   })
